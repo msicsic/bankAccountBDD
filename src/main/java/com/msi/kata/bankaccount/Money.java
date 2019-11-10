@@ -18,6 +18,10 @@ public class Money {
         return new Money(this.amount.add(other.amount));
     }
 
+    public Money negate() {
+        return new Money(this.amount.negate());
+    }
+
     public String toString() {
         return this.amount.toString();
     }

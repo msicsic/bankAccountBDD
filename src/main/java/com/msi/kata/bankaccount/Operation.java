@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Operation {
-    public enum Type {DEPOSIT}
+    public enum Type {DEPOSIT, WITHDRAWAL}
 
     private Type type;
     private Money amount;
@@ -12,8 +12,12 @@ public class Operation {
 
     public Operation(Type type, Money amount, LocalDate date) {
         this.type = type;
-        this.amount = amount;
         this.date = date;
+        if (type == Type.WITHDRAWAL) {
+            this.amount = amount.negate();
+        } else {
+            this.amount = amount;
+        }
     }
 
     public Type getType() {

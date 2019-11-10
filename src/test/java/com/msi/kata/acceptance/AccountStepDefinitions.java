@@ -26,6 +26,10 @@ public class AccountStepDefinitions implements En {
             account.deposit(new Money(amount), now);
         });
 
+        Given("^I withdraw (\\d+) Euros$", (Integer amount) -> {
+            account.withdraw(new Money(amount), now);
+        });
+
         When("^I ask for the statement$", () -> {
             account.printStatement(printer);
         });

@@ -56,4 +56,19 @@ class AccountShould {
         verify(history).getStatement();
         verify(printer).printStatement(statement);
     }
+
+    @Test
+    void withdrawal_100_added_in_history() {
+        // GIVEN
+        OperationHistory history = mock(OperationHistory.class);
+        LocalDate now = LocalDate.now();
+        Account account = new Account(history);
+
+        // WHEN
+        account.withdraw(new Money(100), now);
+
+        // THEN
+        verify(history).add(Operation.Type.WITHDRAWAL, new Money(100), now);
+    }
+
 }
