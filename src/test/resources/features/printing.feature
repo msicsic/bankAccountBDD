@@ -14,3 +14,16 @@ Feature: Statement printing
     Then I should see
       | operation | date       | amount | balance |
       | DEPOSIT   | 2010-10-01 | 50     | 50      |
+
+  Scenario: make multiple deposits on my account and print statement
+    Given make the following operations
+      | operation  | date       | amount |
+      | DEPOSIT    | 2010-10-01 | 50     |
+      | DEPOSIT    | 2010-10-02 | 30     |
+      | WITHDRAWAL | 2010-10-03 | 20     |
+    When I ask for the statement
+    Then I should see
+      | operation  | date       | amount | balance |
+      | WITHDRAWAL | 2010-10-03 | -20    | 60      |
+      | DEPOSIT    | 2010-10-02 | 30     | 80      |
+      | DEPOSIT    | 2010-10-01 | 50     | 50      |
