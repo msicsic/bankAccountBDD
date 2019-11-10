@@ -11,3 +11,9 @@ Feature: withdraw money from account
     Given I withdraw 20 Euros
     When I ask for the statement
     Then My balance should be 80 Euros
+
+  Scenario: I make multiple withdrawals from my account
+    Given I withdraw 20 Euros
+    And I withdraw 10 Euros
+    When I ask for the statement
+    Then My balance should be 70 Euros
