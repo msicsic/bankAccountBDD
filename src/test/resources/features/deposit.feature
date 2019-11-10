@@ -10,3 +10,9 @@ Feature: deposit money to account
     Given I deposit 100 Euros
     When I ask for the statement
     Then My balance should be 100 Euros
+
+  Scenario: I make multiple deposits on my account
+    Given I deposit 100 Euros
+    Given I deposit 50 Euros
+    When I ask for the statement
+    Then My balance should be 150 Euros

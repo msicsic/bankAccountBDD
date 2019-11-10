@@ -23,7 +23,7 @@ public class AccountStepDefinitions implements En {
         });
 
         Given("^I deposit (\\d+) Euros$", (Integer amount) -> {
-            account.deposit(new Money(100), now);
+            account.deposit(new Money(amount), now);
         });
 
         When("^I ask for the statement$", () -> {
