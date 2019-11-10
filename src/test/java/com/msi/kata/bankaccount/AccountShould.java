@@ -2,7 +2,6 @@ package com.msi.kata.bankaccount;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
-import org.mockito.Mockito;
 
 import java.time.LocalDate;
 
@@ -41,4 +40,20 @@ class AccountShould {
         inOrder.verify(history).add(Operation.Type.DEPOSIT, new Money(200), now);
     }
 
+    @Test
+    void print_statement_from_history() {
+        // GIVEN
+        Statement statement = mock(Statement.class);
+        OperationHistory history = mock(OperationHistory.class);
+        when(history.getStatement()).thenReturn(statement);
+        StatementPrinter printer = mock(StatementPrinter.class);
+        Account account = new Account(history);
+
+        // WHEN
+        account.printStatement(printer);
+
+        // THEN
+        verify(history).getStatement();
+        verify(printer).printStatement(statement);
+    }
 }

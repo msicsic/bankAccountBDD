@@ -14,6 +14,6 @@ public class Account {
     }
 
     public void printStatement(StatementPrinter printer) {
-        // TODO
+        printer.printStatement(history.getStatement());
     }
 }
