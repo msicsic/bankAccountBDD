@@ -1,8 +1,12 @@
 package com.msi.kata.acceptance;
 
-import com.msi.kata.bankaccount.*;
-import cucumber.api.PendingException;
+import com.msi.kata.Helpers;
+import com.msi.kata.bankaccount.Account;
+import com.msi.kata.bankaccount.Money;
+import com.msi.kata.bankaccount.OperationHistory;
+import com.msi.kata.bankaccount.OperationHistoryMemory;
 import cucumber.api.java8.En;
+import org.junit.jupiter.api.Assertions;
 
 import java.time.LocalDate;
 
@@ -10,7 +14,7 @@ import java.time.LocalDate;
 public class AccountStepDefinitions implements En {
     private LocalDate now = LocalDate.now();
     private OperationHistory history = new OperationHistoryMemory();
-    private StatementPrinter printer = new StatementPrinterText();
+    private FakePrinter printer = new FakePrinter();
     private Account account;
 
     public AccountStepDefinitions() {
@@ -26,9 +30,8 @@ public class AccountStepDefinitions implements En {
             account.printStatement(printer);
         });
 
-        Then("^My balance should be (\\d+) Euros$", (Integer arg0) -> {
-            // TODO check balance in the printer result
-            throw new PendingException();
+        Then("^My balance should be (\\d+) Euros$", (Integer amount) -> {
+            Assertions.assertEquals(new Money(amount), Helpers.getBalance(printer.statement));
         });
 
     }

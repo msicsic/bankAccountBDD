@@ -14,6 +14,10 @@ public class Money {
         this.amount = amount;
     }
 
+    public Money add(Money other) {
+        return new Money(this.amount.add(other.amount));
+    }
+
     public String toString() {
         return this.amount.toString();
     }
